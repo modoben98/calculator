@@ -1,0 +1,82 @@
+.calculator {
+	display: flex;
+	flex-direction: column;
+	height: 525px;
+	width: 350px;
+	background-color: rgb(219, 218, 234);
+}
+
+.screen {
+	background-color: rgb(88, 125, 113);
+	height: 80px;
+	margin: 20px;
+}
+
+.buttons {
+	margin-left: 20px;
+	margin-right: 20px;
+	height: 440px;
+	display: flex;
+	justify-content: center;
+/*	gap: 10px;*/
+}
+.left-part {
+	display: flex;
+	flex-direction: column;
+/*	gap: 10px;*/
+}
+
+.operations {
+	display: flex;
+	flex-direction: column;
+/*	gap: 10px;*/
+}
+
+.numbers {
+	display: flex;
+	flex-direction: column;
+/*	gap: 10px;*/
+
+}
+
+.special-operations {
+	display: flex;
+/*	gap: 10px;*/
+}
+
+.first-row, .second-row, .third-row {
+	display: flex;
+/*	gap: 10px;*/
+}
+/*.buttons .left-part {
+	gap: 10px;
+}*/
+
+.buttons, .left-part, .operations, .special-operations,
+.numbers, .first-row, .second-row, .third-row 
+{
+	gap: 10px;
+}
+
+#zero {
+	width: 230px;
+}
+
+
+button {
+	height: 70px;
+	width: 70px;
+	border: solid black;
+}
+
+.numbers button {
+	background-color: #ee6123;
+}
+
+.special-operations button {
+	background-color: #4392F1;
+}
+
+.operations button {
+	background-color: #7CDF64;
+}
