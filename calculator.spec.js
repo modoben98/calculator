@@ -11,7 +11,6 @@ document.body.innerHTML = html;
 
 require('./calculator.js');
 
-
 describe('screenPrint', () => {
 	
 
@@ -20,8 +19,8 @@ describe('screenPrint', () => {
 		const digitButton = document.querySelectorAll(".digits button")[0];
 
 		digitButton.click();
+		
 		expect(screen.textContent).toBe("7");
-
 	});
 
 	test("When random digit button is clicked show digit in screen", () => {
@@ -31,6 +30,7 @@ describe('screenPrint', () => {
 		const randomIndex = Math.floor(Math.random() * 10);
 
 		const randomDigitButton = digitButtons[randomIndex] ;
+		
 		randomDigitButton.click();
 
 		expect(screen.textContent).toBe(randomDigitButton.textContent);
@@ -42,25 +42,50 @@ describe('screenPrint', () => {
 		screen.textContent = "";
 		const digitButtons = document.querySelectorAll(".digits button");
 		
-		const firstRandomIndex = Math.floor(Math.random() * digitButtons.length);
-		const secondRandomIndex = Math.floor(Math.random() * digitButtons.length);
-		const thirdRandomIndex = Math.floor(Math.random() * digitButtons.length);
+		let randomNumber = "";
 
-		const firstRandomDigitButton = digitButtons[firstRandomIndex] ;
-		const secondRandomDigitButton = digitButtons[secondRandomIndex] ;
-		const thirdRandomDigitButton = digitButtons[thirdRandomIndex] ;
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
 
-		const firstRandomDigit = firstRandomDigitButton.textContent;
-		const secondRandomDigit = secondRandomDigitButton.textContent;
-		const thirdRandomDigit = thirdRandomDigitButton.textContent;
+			randomDigitButton.click();
+		}
 
-		const randomDigit = firstRandomDigit + secondRandomDigit + thirdRandomDigit ;
-
-		firstRandomDigitButton.click();
-		secondRandomDigitButton.click();
-		thirdRandomDigitButton.click();
-
-		expect(Number(screen.textContent)).toBe(Number(randomDigit));
+		expect(Number(screen.textContent)).toBe(Number(randomNumber));
 
 	});
-})
+});
+
+describe('allClear', () => {
+	test('when AC button clicked screen stays clear if it is already clear', () => {
+		const screen = document.querySelector(".screen");
+		const allClearButton = document.querySelector("#ac");
+		
+		allClearButton.click();
+
+		expect(screen.textContent).toBe("");
+	});
+
+	test('when AC button clicked after digits were clicked screen clears', () => {
+		const screen = document.querySelector(".screen");
+		const allClearButton = document.querySelector("#ac")
+		const digitButtons = document.querySelectorAll(".digits button");
+
+		let randomNumber = "";
+
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomNumber;
+
+			randomDigitButton.click();
+		}
+
+		allClearButton.click();
+
+		expect(screen.textContent).toBe("");
+	});
+});

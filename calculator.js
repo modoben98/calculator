@@ -7,3 +7,9 @@ digitButtons.forEach( (digitButton) => {
 		screen.textContent += digitButton.textContent;
 	})
 });
+
+const allClearButton = document.querySelector("#ac");
+
+allClearButton.addEventListener("click", () => {
+	screen.textContent = "";
+});
