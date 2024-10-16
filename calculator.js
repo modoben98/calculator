@@ -7,6 +7,7 @@ const screen = document.querySelector(".screen");
 const digitButtons = document.querySelectorAll(".digits button");
 const allClearButton = document.querySelector("#ac");
 const addButton = document.querySelector("#add");
+const substractButton = document.querySelector("#substract")
 
 digitButtons.forEach( (digitButton) => {
 	digitButton.addEventListener("click", () => {
@@ -25,7 +26,7 @@ allClearButton.addEventListener("click", () => {
 
 addButton.addEventListener("click", () => {
 	currentOperation = "addition";
-	
+
 	if (screen.textContent == "") {
 		result = firstOperand;
 		return ;
@@ -35,11 +36,28 @@ addButton.addEventListener("click", () => {
 	screen.textContent = "";
 });
 
+substractButton.addEventListener("click", () => {
+	currentOperation = "substraction";
+
+	if (screen.textContent == "") {
+		result = firstOperand;
+		return ;
+	}
+	
+	firstOperand = Number(screen.textContent);
+	result = firstOperand;
+	screen.textContent = "";
+
+})
 equal.addEventListener("click", () => {
 	secondOperand = Number(screen.textContent);
 
 	if (currentOperation == "addition"){
 		result += secondOperand;
+		currentOperation = "";
+		screen.textContent = result;
+	} else if (currentOperation == "substraction") {
+		result -= secondOperand;
 		currentOperation = "";
 		screen.textContent = result;
 	} else {

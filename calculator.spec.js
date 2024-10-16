@@ -15,6 +15,7 @@ const screen = document.querySelector(".screen");
 const digitButtons = document.querySelectorAll(".digits button");
 const allClearButton = document.querySelector("#ac");
 const addButton = document.querySelector("#add");
+const substractButton = document.querySelector("#substract")
 const equalButton = document.querySelector("#equal");
 
 describe('screenPrint', () => {
@@ -130,6 +131,65 @@ describe("add", () => {
 		}
 
 		result += Number(randomNumber);
+		
+		equalButton.click();
+
+		expect(Number(screen.textContent)).toBe(result);
+	});
+});
+
+describe("substract", () => {
+	test("clicking substraction button when screen is clear does nothing", () => {
+		allClearButton.click();
+		substractButton.click();
+
+		expect(screen.textContent).toBe("");
+	});
+
+	test("clicking substract button when screen shows a number clears the screen", () => {		
+		allClearButton.click();
+
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+
+			randomDigitButton.click();
+		}
+
+		substractButton.click();
+
+		expect(screen.textContent).toBe("");
+
+	});
+	
+	test("entering a number then clicking substract button then another number and finally equal sign shows the result of the substraction in the screen", () => {
+		allClearButton.click();
+		let result = 0;
+
+		let randomNumber = "";
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
+
+			randomDigitButton.click();
+		}
+
+		result = Number(randomNumber);
+		substractButton.click();
+		
+		randomNumber = "";
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
+
+			randomDigitButton.click();
+		}
+
+		result -= Number(randomNumber);
 		
 		equalButton.click();
 
