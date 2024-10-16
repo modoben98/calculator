@@ -15,52 +15,52 @@ require('./calculator.js');
 describe('screenPrint', () => {
 	
 
-	test("When number 7 button is clicked show number in screen", () => {
+	test("When digit 7 button is clicked show digit in screen", () => {
 		const screen = document.querySelector(".screen");
-		const numberButton = document.querySelectorAll(".numbers button")[0];
+		const digitButton = document.querySelectorAll(".digits button")[0];
 
-		numberButton.click();
+		digitButton.click();
 		expect(screen.textContent).toBe("7");
 
 	});
 
-	test("When random number button is clicked show number in screen", () => {
+	test("When random digit button is clicked show digit in screen", () => {
 		const screen = document.querySelector(".screen");
 		screen.textContent = "";
-		const numberButtons = document.querySelectorAll(".numbers button");
+		const digitButtons = document.querySelectorAll(".digits button");
 		const randomIndex = Math.floor(Math.random() * 10);
 
-		const randomNumberButton = numberButtons[randomIndex] ;
-		randomNumberButton.click();
+		const randomDigitButton = digitButtons[randomIndex] ;
+		randomDigitButton.click();
 
-		expect(screen.textContent).toBe(randomNumberButton.textContent);
+		expect(screen.textContent).toBe(randomDigitButton.textContent);
 	});
 
 
-	test("When multiple number buttons are clicked, show number in screen", () => {
+	test("When multiple digit buttons are clicked, show digit in screen", () => {
 		const screen = document.querySelector(".screen");
 		screen.textContent = "";
-		const numberButtons = document.querySelectorAll(".numbers button");
+		const digitButtons = document.querySelectorAll(".digits button");
 		
-		const firstRandomIndex = Math.floor(Math.random() * numberButtons.length);
-		const secondRandomIndex = Math.floor(Math.random() * numberButtons.length);
-		const thirdRandomIndex = Math.floor(Math.random() * numberButtons.length);
+		const firstRandomIndex = Math.floor(Math.random() * digitButtons.length);
+		const secondRandomIndex = Math.floor(Math.random() * digitButtons.length);
+		const thirdRandomIndex = Math.floor(Math.random() * digitButtons.length);
 
-		const firstRandomNumberButton = numberButtons[firstRandomIndex] ;
-		const secondRandomNumberButton = numberButtons[secondRandomIndex] ;
-		const thirdRandomNumberButton = numberButtons[thirdRandomIndex] ;
+		const firstRandomDigitButton = digitButtons[firstRandomIndex] ;
+		const secondRandomDigitButton = digitButtons[secondRandomIndex] ;
+		const thirdRandomDigitButton = digitButtons[thirdRandomIndex] ;
 
-		const firstRandomNumber = firstRandomNumberButton.textContent;
-		const secondRandomNumber = secondRandomNumberButton.textContent;
-		const thirdRandomNumber = thirdRandomNumberButton.textContent;
+		const firstRandomDigit = firstRandomDigitButton.textContent;
+		const secondRandomDigit = secondRandomDigitButton.textContent;
+		const thirdRandomDigit = thirdRandomDigitButton.textContent;
 
-		const randomNumber = firstRandomNumber + secondRandomNumber + thirdRandomNumber ;
+		const randomDigit = firstRandomDigit + secondRandomDigit + thirdRandomDigit ;
 
-		firstRandomNumberButton.click();
-		secondRandomNumberButton.click();
-		thirdRandomNumberButton.click();
+		firstRandomDigitButton.click();
+		secondRandomDigitButton.click();
+		thirdRandomDigitButton.click();
 
-		expect(Number(screen.textContent)).toBe(Number(randomNumber));
+		expect(Number(screen.textContent)).toBe(Number(randomDigit));
 
 	});
 })

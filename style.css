@@ -32,7 +32,7 @@
 /*	gap: 10px;*/
 }
 
-.numbers {
+.digits {
 	display: flex;
 	flex-direction: column;
 /*	gap: 10px;*/
@@ -53,7 +53,7 @@
 }*/
 
 .buttons, .left-part, .operations, .special-operations,
-.numbers, .first-row, .second-row, .third-row 
+.digits, .first-row, .second-row, .third-row 
 {
 	gap: 10px;
 }
@@ -69,7 +69,7 @@ button {
 	border: solid black;
 }
 
-.numbers button {
+.digits button {
 	background-color: #ee6123;
 }
 

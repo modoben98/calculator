@@ -1,16 +1,9 @@
 const screen = document.querySelector(".screen");
 
-const numberButtons = document.querySelectorAll(".numbers button");
+const digitButtons = document.querySelectorAll(".digits button");
 
-numberButtons.forEach( (numberButton) => {
-	numberButton.addEventListener("click", () => {
-		screen.textContent += numberButton.textContent;
+digitButtons.forEach( (digitButton) => {
+	digitButton.addEventListener("click", () => {
+		screen.textContent += digitButton.textContent;
 	})
 });
-
-// const randomNumberButton = numberButtons[0] ;
-
-// //console.log(randomNumberButton);
-
-// randomNumberButton.click();
-// console.log(screen.textContent);
