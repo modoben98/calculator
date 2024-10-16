@@ -7,7 +7,10 @@ const screen = document.querySelector(".screen");
 const digitButtons = document.querySelectorAll(".digits button");
 const allClearButton = document.querySelector("#ac");
 const addButton = document.querySelector("#add");
-const substractButton = document.querySelector("#substract")
+const substractButton = document.querySelector("#substract");
+const multiplyButton = document.querySelector("#multiply");
+const divideButton = document.querySelector("#divide");
+const equalButton = document.querySelector("#equal");
 
 digitButtons.forEach( (digitButton) => {
 	digitButton.addEventListener("click", () => {
@@ -48,8 +51,37 @@ substractButton.addEventListener("click", () => {
 	result = firstOperand;
 	screen.textContent = "";
 
-})
-equal.addEventListener("click", () => {
+});
+
+substractButton.addEventListener("click", () => {
+	currentOperation = "substraction";
+
+	if (screen.textContent == "") {
+		result = firstOperand;
+		return ;
+	}
+	
+	firstOperand = Number(screen.textContent);
+	result = firstOperand;
+	screen.textContent = "";
+
+});
+
+multiplyButton.addEventListener("click", () => {
+	currentOperation = "multiply";
+
+	if (screen.textContent == "") {
+		result = firstOperand;
+		return ;
+	}
+	
+	firstOperand = Number(screen.textContent);
+	result = firstOperand;
+	screen.textContent = "";
+
+});
+
+equalButton.addEventListener("click", () => {
 	secondOperand = Number(screen.textContent);
 
 	if (currentOperation == "addition"){
@@ -60,11 +92,13 @@ equal.addEventListener("click", () => {
 		result -= secondOperand;
 		currentOperation = "";
 		screen.textContent = result;
+	} else if (currentOperation == "multiply") {
+		result *= secondOperand;
+		currentOperation = "";
+		screen.textContent = result;		
 	} else {
 		firstOperand = Number(screen.textContent);
 		result = firstOperand ;
 		screen.textContent = result;
 	}
-
-	
 });

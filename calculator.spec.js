@@ -15,7 +15,9 @@ const screen = document.querySelector(".screen");
 const digitButtons = document.querySelectorAll(".digits button");
 const allClearButton = document.querySelector("#ac");
 const addButton = document.querySelector("#add");
-const substractButton = document.querySelector("#substract")
+const substractButton = document.querySelector("#substract");
+const multiplyButton = document.querySelector("#multiply");
+const divideButton = document.querySelector("#divide");
 const equalButton = document.querySelector("#equal");
 
 describe('screenPrint', () => {
@@ -195,4 +197,64 @@ describe("substract", () => {
 
 		expect(Number(screen.textContent)).toBe(result);
 	});
+});
+
+describe("multiply", () => {
+	test("clicking multiplication button when screen is clear does nothing", () => {
+		allClearButton.click();
+		multiplyButton.click();
+
+		expect(screen.textContent).toBe("");
+	});
+
+	test("clicking multiply button when screen shows a number clears the screen", () => {		
+		allClearButton.click();
+
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+
+			randomDigitButton.click();
+		}
+
+		multiplyButton.click();
+
+		expect(screen.textContent).toBe("");
+
+	});
+	
+	test("entering a number then clicking multiply button then another number and finally equal sign shows the result of the multiplication in the screen", () => {
+		allClearButton.click();
+		let result = 1;
+
+		let randomNumber = "";
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
+
+			randomDigitButton.click();
+		}
+
+		result = Number(randomNumber);
+		multiplyButton.click();
+		
+		randomNumber = "";
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
+
+			randomDigitButton.click();
+		}
+
+		result *= Number(randomNumber);
+		
+		equalButton.click();
+
+		expect(Number(screen.textContent)).toBe(result);
+	});
 })
+
