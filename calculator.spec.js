@@ -1,59 +1,66 @@
-const calculator = require('./calculator');
+/**
+ * @jest-environment jsdom
+ */
+const fs = require('fs');
+const path = require('path');
 
 
-describe('add', () => {
-	test("adds positive numbers", () => {
-		expect(calculator.add(23 , 12)).toBe(35);
+// Load HTML file content into the document
+const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
+document.body.innerHTML = html;
+
+require('./calculator.js');
+
+
+describe('screenPrint', () => {
+	
+
+	test("When number 7 button is clicked show number in screen", () => {
+		const screen = document.querySelector(".screen");
+		const numberButton = document.querySelectorAll(".numbers button")[0];
+
+		numberButton.click();
+		expect(screen.textContent).toBe("7");
+
 	});
 
-	test('add negative numbers', () => {
-		expect(calculator.add(-23, -12)).toBe(-35);
-	} )
-});
+	test("When random number button is clicked show number in screen", () => {
+		const screen = document.querySelector(".screen");
+		screen.textContent = "";
+		const numberButtons = document.querySelectorAll(".numbers button");
+		const randomIndex = Math.floor(Math.random() * 10);
 
-describe('substract', () => {
-	test("substract positive numbers", () => {
-		expect(calculator.substract(15 , 12)).toBe(3);
+		const randomNumberButton = numberButtons[randomIndex] ;
+		randomNumberButton.click();
+
+		expect(screen.textContent).toBe(randomNumberButton.textContent);
 	});
 
-	test("substract positive and negative numbers", () => {
-		expect(calculator.substract(15, -12)).toBe(27);
-	});
 
-	test("substract negative numbers", () => {
-		expect(calculator.substract(-15, -12)).toBe(-3);
-	});
+	test("When multiple number buttons are clicked, show number in screen", () => {
+		const screen = document.querySelector(".screen");
+		screen.textContent = "";
+		const numberButtons = document.querySelectorAll(".numbers button");
+		
+		const firstRandomIndex = Math.floor(Math.random() * numberButtons.length);
+		const secondRandomIndex = Math.floor(Math.random() * numberButtons.length);
+		const thirdRandomIndex = Math.floor(Math.random() * numberButtons.length);
 
-	test("substract negative and positive numbers", () => {
-		expect(calculator.substract(-15, 12)).toBe(-27);
-	});
+		const firstRandomNumberButton = numberButtons[firstRandomIndex] ;
+		const secondRandomNumberButton = numberButtons[secondRandomIndex] ;
+		const thirdRandomNumberButton = numberButtons[thirdRandomIndex] ;
 
-});
+		const firstRandomNumber = firstRandomNumberButton.textContent;
+		const secondRandomNumber = secondRandomNumberButton.textContent;
+		const thirdRandomNumber = thirdRandomNumberButton.textContent;
 
-describe('multiply', () => {
-	test("multiply positive numbers", () => {
-		expect(calculator.multiply(15, 17)).toBe(255);
-	});
+		const randomNumber = firstRandomNumber + secondRandomNumber + thirdRandomNumber ;
 
-	test("multiply negative and positive numbers", () => {
-		expect(calculator.multiply(15, -17)).toBe(-255);
-	})
+		firstRandomNumberButton.click();
+		secondRandomNumberButton.click();
+		thirdRandomNumberButton.click();
 
-	test("multiply negative numbers", () => {
-		expect(calculator.multiply(-15, -17)).toBe(255);
-	})
-});
+		expect(Number(screen.textContent)).toBe(Number(randomNumber));
 
-describe('divide', () => {
-	test("divide positive numbers", () => {
-		expect(calculator.divide(15, 3)).toBe(5);
-	});
-
-	test("divide by 0", () => {
-		expect(calculator.divide(15, 0)).toBe("Hello? Are you sick ?");
-	});
-
-	test("divide negative numbers", () => {
-		expect(calculator.divide(15, -3)).toBe(-5);
 	});
 })

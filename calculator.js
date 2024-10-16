@@ -1,27 +1,16 @@
-function add ( a, b) {
+const screen = document.querySelector(".screen");
 
-	return a + b ;
-}
+const numberButtons = document.querySelectorAll(".numbers button");
 
-function substract( a, b) {
-	return a - b;
-}
+numberButtons.forEach( (numberButton) => {
+	numberButton.addEventListener("click", () => {
+		screen.textContent += numberButton.textContent;
+	})
+});
 
-function multiply( a, b) {
-	return a * b ;
-}
+// const randomNumberButton = numberButtons[0] ;
 
-function divide( a, b) {
-	if (b == 0) {
-		return "Hello? Are you sick ?";
-	} else {
-		return a / b;	
-	}
-}
+// //console.log(randomNumberButton);
 
-module.exports = {
-	add,
-	substract,
-	multiply,
-	divide
-};
+// randomNumberButton.click();
+// console.log(screen.textContent);
