@@ -256,5 +256,83 @@ describe("multiply", () => {
 
 		expect(Number(screen.textContent)).toBe(result);
 	});
-})
+});
+
+describe("divide", () => {
+	test("clicking division button when screen is clear does nothing", () => {
+		allClearButton.click();
+		divideButton.click();
+
+		expect(screen.textContent).toBe("");
+	});
+
+	test("clicking divide button when screen shows a number clears the screen", () => {		
+		allClearButton.click();
+
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+
+			randomDigitButton.click();
+		}
+
+		divideButton.click();
+
+		expect(screen.textContent).toBe("");
+
+	});
+	
+	test("entering a number then clicking divide button then another number and finally equal sign shows the result of the division in the screen", () => {
+		allClearButton.click();
+		let result = 1;
+
+		let randomNumber = "";
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
+
+			randomDigitButton.click();
+		}
+
+		result = Number(randomNumber);
+		divideButton.click();
+		
+		randomNumber = "";
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+			const randomDigit = randomDigitButton.textContent;
+			randomNumber += randomDigit;
+
+			randomDigitButton.click();
+		}
+
+		result /= Number(randomNumber);
+		
+		equalButton.click();
+
+		expect(Number(screen.textContent)).toBe(result);
+	});
+
+	test("dividing by zero should return a snarky message", () => {
+		allClearButton.click();
+
+		for (let i = 0; i < 3; i++) {
+			const randomIndex = Math.floor(Math.random() * 10);
+			const randomDigitButton = digitButtons[randomIndex];
+
+			randomDigitButton.click();
+		}
+
+		divideButton.click();
+		
+		const zeroButton = document.querySelector("#zero");
+		
+		equalButton.click();
+
+		expect(screen.textContent).toBe("Are you ok?");
+	});
+});
 

@@ -53,8 +53,9 @@ substractButton.addEventListener("click", () => {
 
 });
 
-substractButton.addEventListener("click", () => {
-	currentOperation = "substraction";
+
+multiplyButton.addEventListener("click", () => {
+	currentOperation = "multiply";
 
 	if (screen.textContent == "") {
 		result = firstOperand;
@@ -67,8 +68,8 @@ substractButton.addEventListener("click", () => {
 
 });
 
-multiplyButton.addEventListener("click", () => {
-	currentOperation = "multiply";
+divideButton.addEventListener("click", () => {
+	currentOperation = "divide";
 
 	if (screen.textContent == "") {
 		result = firstOperand;
@@ -96,6 +97,15 @@ equalButton.addEventListener("click", () => {
 		result *= secondOperand;
 		currentOperation = "";
 		screen.textContent = result;		
+	} else if (currentOperation == "divide") {
+		if (secondOperand == 0) {
+			screen.textContent = "Are you ok?";
+			currentOperation = "";
+		} else{			
+			result /= secondOperand;
+			currentOperation = "";
+			screen.textContent = result;		
+		}
 	} else {
 		firstOperand = Number(screen.textContent);
 		result = firstOperand ;
